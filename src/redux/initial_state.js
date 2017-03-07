@@ -1,3 +1,5 @@
 export default {
-  todo: {},
+  todo: {
+    name: '',
+  },
 }
