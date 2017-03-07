@@ -5,7 +5,7 @@ import { fromJS } from 'immutable';
 export default (state = fromJS(initialState.todo), action) => {
   switch (action.type) {
     case C.ADD_TODO: {
-      const { name } = action.data;
+      const { name } = action;
       return state.merge({
         name,
         completed: false,

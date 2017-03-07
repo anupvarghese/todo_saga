@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from './redux/actions/todo';
+import { addTodoAsync } from './redux/actions/todo';
 
 import './App.css';
 
 class App extends Component {
   handleClick = () => {
-    this.props.addTodo('Hi');
+    this.props.addTodoAsync('Hi');
   }
   render() {
     return (
@@ -22,7 +22,7 @@ class App extends Component {
 }
 
 const mapDispatchToProps = {
-  addTodo,
+  addTodoAsync,
 }
 
 export default connect(null, mapDispatchToProps)(App);
