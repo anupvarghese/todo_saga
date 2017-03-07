@@ -16,6 +16,9 @@ class App extends Component {
         <p className="App-intro">
           <button onClick={this.handleClick}> Hi </button>
         </p>
+        <p className="App-intro">
+          {this.props.todo}
+        </p>
       </div>
     );
   }
@@ -25,4 +28,8 @@ const mapDispatchToProps = {
   addTodoAsync,
 }
 
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = (state, ownProps) => ({
+  todo: state.todo.get('name'),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

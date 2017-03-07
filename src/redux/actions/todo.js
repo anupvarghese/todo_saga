@@ -5,12 +5,18 @@ const addTodoAsync = (name) => ({
   name,
 });
 
-const addTodo = name => ({
-  type: C.ADD_TODO,
+const addTodoSuccess = name => ({
+  type: C.ADD_TODO_SUCCESS,
   name,
 });
 
+const addTodoError = error => ({
+  type: C.ADD_TODO_ERROR,
+  error,
+});
+
 export {
-  addTodo,
+  addTodoSuccess,
+  addTodoError,
   addTodoAsync,
 };
