@@ -1,5 +1,6 @@
 export default {
   todo: {
-    name: '',
+    items: [],
+    loading: false,
   },
 }

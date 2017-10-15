@@ -1,24 +1,59 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTodoAsync } from './redux/actions/todo';
+import { addTodoAsync,  removeTodoAsync } from './redux/actions/todo';
 
-import './App.css';
+const ToDo = ({ name, id , status, handleRemove }) => (
+  <div>
+    <p> {name} { name && (status ? 'Done' : 'Not Yet')} </p>
+    <button onClick={handleRemove(name)}>Remove</button>
+  </div>
+);
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      todo: '',
+    }
+  }
+
+  handleRemove = (id) => () => {
+    this.props.removeTodoAsync(id);
+  }
+
   handleClick = () => {
-    this.props.addTodoAsync('Hi');
+    this.props.addTodoAsync(this.state.todo);
+    this.setState({
+      todo: ''
+    });
+  }
+
+  handleChange = (e) => {
+    const todo = e.target.value;
+    if (todo) {
+      this.setState({
+        todo: e.target.value,
+      });
+    }
   }
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
+      <div>
+        <div>
         </div>
-        <p className="App-intro">
-          <button onClick={this.handleClick}> Hi </button>
+        <p>
+          <input onChange={this.handleChange} value={this.state.todo} />
+          <button onClick={this.handleClick}> Add Todo </button>
         </p>
-        <p className="App-intro">
-          {this.props.todo}
-        </p>
+        <div> To Dos</div>
+        <div>
+          {
+            this.props.todos.map(t => (
+                <ToDo key={t.name} {...t} handleRemove={this.handleRemove}/>
+              )
+            )
+          }
+        </div>
       </div>
     );
   }
@@ -26,10 +61,11 @@ class App extends Component {
 
 const mapDispatchToProps = {
   addTodoAsync,
+  removeTodoAsync,
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  todo: state.todo.get('name'),
+  todos: state.todo.get('items'),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

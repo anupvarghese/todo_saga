@@ -5,9 +5,14 @@ const addTodoAsync = (name) => ({
   name,
 });
 
-const addTodoSuccess = name => ({
+const removeTodoAsync = (id) => ({
+  type: C.REMOVE_TODO_ASYNC,
+  id,
+});
+
+const addTodoSuccess = data => ({
   type: C.ADD_TODO_SUCCESS,
-  name,
+  data,
 });
 
 const addTodoError = error => ({
@@ -15,8 +20,26 @@ const addTodoError = error => ({
   error,
 });
 
+const todoRequest = error => ({
+  type: C.TODO_REQUEST,
+});
+
+const removeTodoSuccess = name => ({
+  type: C.REMOVE_TODO_SUCCESS,
+  name,
+});
+
+const removeTodoError = (error) => ({
+  type: C.REMOVE_TODO_ERROR,
+  error,
+})
+
 export {
   addTodoSuccess,
   addTodoError,
   addTodoAsync,
+  removeTodoAsync,
+  todoRequest,
+  removeTodoSuccess,
+  removeTodoError,
 };
